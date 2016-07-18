@@ -1,7 +1,8 @@
 #! /usr/bin/env/ python3
 
 # Author: James Bui for Team WRAPP
-# Last Modified: July 8, 2016
+# File: wrappCookieChecker.py
+# Last Modified: July 12, 2016
 # Description: This script scraps the website the user enters in to parse out 
 #		       the <a> tags that contains links related to the website domain.
 #			   It stores the websites in a list and determines if the website 
@@ -69,13 +70,13 @@ def main():
 	else: 
 		siteURL = sys.argv[1]
 
-	if siteURL[:6] != 'http://' and siteURL[:4] == 'www.' and siteURL[-4:] in TLDomain:
+	if (siteURL[:11] == 'http://www.' or siteURL[:12] == 'https://www.') and siteURL[-4:] in TLDomain:
+		pass
+	elif (siteURL[:7] != 'http://' or siteURL[:8] != 'https://') and siteURL[:4] == 'www.' and siteURL[-4:] in TLDomain:
+		print(siteURL[:6])
 		siteURL = 'http://' + siteURL
 	elif siteURL[:4] != 'www.' and siteURL[-4:] in TLDomain:
 		siteURL = 'http://www.' + siteURL
-	elif siteURL[:10] == 'http://www.' and siteURL[-4:] in TLDomain:
-		# Do nothing
-		pass
 	else:
 		print('Invalid URL')
 		exit(-1)
@@ -85,5 +86,5 @@ def main():
 
 
 
-if __name__ == '__main__':
-	main()
+# if __name__ == '__main__':
+# 	main()
